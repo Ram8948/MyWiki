@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ImageinfosFragment">
+
+    <fragment
+        android:id="@+id/ImageinfosFragment"
+        android:name="com.ramosoft.mywiki.ui.images.ImageinfosFragment"
+        android:label="Imageinfos"
+        tools:layout="@layout/characters_fragment" >
+<!--        <action-->
+<!--            android:id="@+id/action_ImageinfosFragment_to_ImageinfoDetailFragment"-->
+<!--            app:destination="@id/ImageinfoDetailFragment" />-->
+
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/ImageinfoDetailFragment"-->
+<!--        android:name="com.ramosoft.mywiki.ui.Imageinfodetail.ImageinfoDetailFragment"-->
+<!--        android:label="Imageinfo Detail"-->
+<!--        tools:layout="@layout/Imageinfo_detail_fragment" />-->
+</navigation>
