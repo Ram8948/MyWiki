@@ -3,9 +3,9 @@ package com.ramosoft.mywiki.di
 import android.content.Context
 import com.ramosoft.mywiki.data.local.AppDatabase
 import com.ramosoft.mywiki.data.local.ImageinfoDao
-import com.ramosoft.mywiki.data.remote.ImageinfoRemoteDataSource
-import com.ramosoft.mywiki.data.remote.ImageinfoService
-import com.ramosoft.mywiki.data.repository.ImageinfoRepository
+import com.ramosoft.mywiki.data.remote.RemoteDataSource
+import com.ramosoft.mywiki.data.remote.ApiService
+import com.ramosoft.mywiki.data.repository.Repository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -32,11 +32,11 @@ object AppModule {
     fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun provideImageinfoService(retrofit: Retrofit): ImageinfoService = retrofit.create(ImageinfoService::class.java)
+    fun provideImageinfoService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 
     @Singleton
     @Provides
-    fun provideImageinfoRemoteDataSource(ImageinfoService: ImageinfoService) = ImageinfoRemoteDataSource(ImageinfoService)
+    fun provideImageinfoRemoteDataSource(ApiService: ApiService) = RemoteDataSource(ApiService)
 
     @Singleton
     @Provides
@@ -48,7 +48,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(remoteDataSource: ImageinfoRemoteDataSource,
+    fun provideRepository(remoteDataSource: RemoteDataSource,
                           localDataSource: ImageinfoDao) =
-        ImageinfoRepository(remoteDataSource, localDataSource)
+        Repository(remoteDataSource, localDataSource)
 }

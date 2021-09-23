@@ -3,6 +3,7 @@ package com.ramosoft.mywiki.ui.adapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.ramosoft.mywiki.ui.images.CategoryFragment
 import com.ramosoft.mywiki.ui.images.ImageinfosFragment
 
 
@@ -16,7 +17,7 @@ class ViewPagerAdapter(appCompatActivity : AppCompatActivity) : FragmentStateAda
         return when (position) {
             0 -> ImageinfosFragment()
             1 -> ImageinfosFragment()
-            2 -> ImageinfosFragment()
+            2 -> CategoryFragment()
             else -> ImageinfosFragment()
         }
     }

@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ramosoft.mywiki.data.entities.CategoryModel
 import com.ramosoft.mywiki.data.entities.ImageModel
 
-@Database(entities = [ImageModel.Query.MapValue.Imageinfo::class], version = 1, exportSchema = false)
+@Database(entities = [ImageModel.Query.MapValue.Imageinfo::class,CategoryModel.Query.Allcategory::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun ImageinfoDao(): ImageinfoDao

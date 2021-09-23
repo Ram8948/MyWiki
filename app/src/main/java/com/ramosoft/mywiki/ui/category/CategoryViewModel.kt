@@ -4,9 +4,9 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.ramosoft.mywiki.data.repository.Repository
 
-class ImageinfosViewModel @ViewModelInject constructor(
+class CategoryViewModel @ViewModelInject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    val Imageinfos = repository.getImageinfos()
+    val Imageinfos = repository.getCategories()
 }

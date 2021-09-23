@@ -2,12 +2,12 @@ package com.ramosoft.mywiki.data.repository
 
 import com.ramosoft.mywiki.data.entities.ImageModel
 import com.ramosoft.mywiki.data.local.ImageinfoDao
-import com.ramosoft.mywiki.data.remote.ImageinfoRemoteDataSource
+import com.ramosoft.mywiki.data.remote.RemoteDataSource
 import com.ramosoft.mywiki.utils.performGetOperation
 import javax.inject.Inject
 
-class ImageinfoRepository @Inject constructor(
-    private val remoteDataSource: ImageinfoRemoteDataSource,
+class Repository @Inject constructor(
+    private val remoteDataSource: RemoteDataSource,
     private val localDataSource: ImageinfoDao
 ) {
 
@@ -17,10 +17,16 @@ class ImageinfoRepository @Inject constructor(
 //        saveCallResult = { localDataSource.insert(it) }
 //    )
 
+    fun getCategories() = performGetOperation(
+        databaseQuery = { localDataSource.getCategories() },
+        networkCall = { remoteDataSource.getCategories() },
+        saveCallResult = { localDataSource.insertAllCategory(it.query.allcategories) }
+    )
+
     fun getImageinfos() = performGetOperation(
         databaseQuery = { localDataSource.getAllImageinfos() },
         networkCall = { remoteDataSource.getImageinfos() },
-        saveCallResult = { localDataSource.insertAll(getImageList(it.query.pages)) }
+        saveCallResult = { localDataSource.insertAllImage(getImageList(it.query.pages)) }
     )
 
     fun getImageList(map: Map<Int, ImageModel.Query.MapValue>):List<ImageModel.Query.MapValue.Imageinfo>
