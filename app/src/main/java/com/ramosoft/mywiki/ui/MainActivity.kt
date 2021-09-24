@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 //        val appBarConfiguration: AppBarConfiguration = AppBarConfiguration(navController.graph)
 //        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-
+        binding.toolbar.setTitle(R.string.app_name)
         viewPagerAdapter = ViewPagerAdapter(this)
         binding.viewPager.adapter = viewPagerAdapter
         binding.bottomNavigationView.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener{ item ->

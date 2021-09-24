@@ -51,7 +51,7 @@ class CategoryViewHolder(private val itemBinding: ItemCategoryBinding, private v
     }
 
     override fun onClick(v: View?) {
-        //listener.onClickedImageinfo(Imageinfo.id)
+        listener.onClickedImageinfo(Imageinfo.id)
     }
 }
 

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MainWorkspace/MyWikiParser/app/src/main/res/drawable/item_selector.xml" value="0.20364583333333333" />
+        <entry key="..\:/MainWorkspace/MyWikiParser/app/src/main/res/layout/activity_main.xml" value="0.1875" />
         <entry key="..\:/Users/Ram Singh Thakur/AndroidStudioProjects/ImageFetcher/app/src/main/res/layout/character_detail_fragment.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Ram Singh Thakur/AndroidStudioProjects/ImageFetcher/app/src/main/res/layout/characters_fragment.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/Ram Singh Thakur/AndroidStudioProjects/ImageFetcher/app/src/main/res/layout/item_character.xml" value="0.16485507246376813" />

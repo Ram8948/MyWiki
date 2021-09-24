@@ -13,7 +13,7 @@ import com.ramosoft.mywiki.databinding.ItemCharacterBinding
 class ImageinfosAdapter(private val listener: ImageinfoItemListener) : RecyclerView.Adapter<ImageinfoViewHolder>() {
 
     interface ImageinfoItemListener {
-        fun onClickedImageinfo(ImageinfoId: Int)
+        fun onClickedImageinfo(ImageinfoId: String)
     }
 
     private val items = ArrayList<ImageModel.Query.MapValue.Imageinfo>()
@@ -46,16 +46,15 @@ class ImageinfoViewHolder(private val itemBinding: ItemCharacterBinding, private
     @SuppressLint("SetTextI18n")
     fun bind(item: ImageModel.Query.MapValue.Imageinfo) {
         this.Imageinfo = item
-        itemBinding.name.text = item.user
-        itemBinding.speciesAndStatus.text = """${item.descriptionshorturl} - ${item.descriptionurl}"""
+//        itemBinding.name.text = item.user
+//        itemBinding.speciesAndStatus.text = """${item.descriptionshorturl} - ${item.descriptionurl}"""
         Glide.with(itemBinding.root)
             .load(item.url)
-            .transform(CircleCrop())
             .into(itemBinding.image)
     }
 
     override fun onClick(v: View?) {
-        //listener.onClickedImageinfo(Imageinfo.id)
+        listener.onClickedImageinfo(Imageinfo.url)
     }
 }
 

@@ -11,11 +11,11 @@ class Repository @Inject constructor(
     private val localDataSource: ImageinfoDao
 ) {
 
-//    fun getImageinfo(id: Int) = performGetOperation(
-//        databaseQuery = { localDataSource.getImageinfo(id) },
-//        networkCall = { remoteDataSource.getImageinfo(id) },
-//        saveCallResult = { localDataSource.insert(it) }
-//    )
+    fun getImageinfo(id: Int) = performGetOperation(
+        databaseQuery = { localDataSource.getImageinfo(id) },
+        networkCall = { remoteDataSource.getImageinfo(id) },
+        saveCallResult = { localDataSource.insert(it) }
+    )
 
     fun getCategories() = performGetOperation(
         databaseQuery = { localDataSource.getCategories() },

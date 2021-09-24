@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.ramosoft.mywiki.data.repository.Repository
 
 class ImageinfosViewModel @ViewModelInject constructor(
-    private val repository: Repository
+    repository: Repository
 ) : ViewModel() {
 
     val Imageinfos = repository.getImageinfos()

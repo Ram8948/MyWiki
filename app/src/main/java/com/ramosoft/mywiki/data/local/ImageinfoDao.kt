@@ -17,8 +17,8 @@ interface ImageinfoDao {
     @Query("SELECT * FROM category_table")
     fun getCategories() : LiveData<List<CategoryModel.Query.Allcategory>>
 
-//    @Query("SELECT * FROM Imageinfos WHERE id = :id")
-//    fun getImageinfo(id: Int): LiveData<Imageinfo>
+    @Query("SELECT * FROM Imageinfo WHERE id = :id")
+    fun getImageinfo(id: Int): LiveData<ImageModel.Query.MapValue.Imageinfo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllImage(Imageinfos: List<ImageModel.Query.MapValue.Imageinfo>)
@@ -26,8 +26,8 @@ interface ImageinfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllCategory(Imageinfos: List<CategoryModel.Query.Allcategory>)
 
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insert(Imageinfo: Imageinfo)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(Imageinfo: ImageModel.Query.MapValue.Imageinfo)
 
 
 }

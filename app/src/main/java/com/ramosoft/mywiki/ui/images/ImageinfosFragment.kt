@@ -9,13 +9,19 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ramosoft.mywiki.R
 import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.view.*
 
 @AndroidEntryPoint
 class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
@@ -23,7 +29,7 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
     private var binding: CharactersFragmentBinding by autoCleared()
     private val viewModel: ImageinfosViewModel by viewModels()
     private lateinit var adapter: ImageinfosAdapter
-
+    lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,11 +42,16 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
+
+//        val navHostFragment: NavHostFragment = binding.navHostFragment as NavHostFragment
+//        navController = navHostFragment.navController
+
     }
+
 
     private fun setupRecyclerView() {
         adapter = ImageinfosAdapter(this)
-        binding.ImageinfosRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.ImageinfosRv.layoutManager = GridLayoutManager(requireContext(),2)
         binding.ImageinfosRv.adapter = adapter
     }
 
@@ -60,10 +71,13 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
         })
     }
 
-    override fun onClickedImageinfo(ImageinfoId: Int) {
-//        findNavController().navigate(
-//            R.id.action_ImageinfosFragment_to_ImageinfoDetailFragment,
+    override fun onClickedImageinfo(ImageinfoId: String) {
+//        binding.navHostFragment.findNavController().navigate(
+//            R.id.action_ImageinfosFragment_to_ImageDetailFragment,
 //            bundleOf("id" to ImageinfoId)
 //        )
+        requireActivity().supportFragmentManager.beginTransaction()
+            .add((binding.root!!.parent as ViewGroup).id, ImageDetailFragment.newInstacne(ImageinfoId),"IMAGEDETAIL")
+            .commit()
     }
 }
