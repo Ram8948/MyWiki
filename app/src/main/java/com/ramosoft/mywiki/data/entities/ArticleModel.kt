@@ -7,21 +7,27 @@
 //) {
 //    data class Continue(
 //        val `continue`: String, // grncontinue||revisions
-//        val grncontinue: String, // 0.636072957833|0.636072957833|0|0
-//        val imcontinue: String // 1105375|Gran_Armería,_Gdansk,_Polonia,_2013-05-20,_DD_01.jpg
+//        val grncontinue: String, // 0.882685155808|0.882685155808|0|0
+//        val imcontinue: String // 15085855|Western_film_clapperboard.svg
 //    )
 //
 //    data class Query(
 //        val pages: Map<Int,MapValue>
 //    ) {
 //        data class MapValue(
+//            val images: List<Image>,
 //            val ns: Int, // 0
-//            val pageid: Int, // 4163831
+//            val pageid: Int, // 15085855
 //            val revisions: List<Revision>,
-//            val title: String // Gliomatosis cerebri
+//            val title: String // The Stranger (1920 film)
 //        ) {
+//            data class Image(
+//                val ns: Int, // 6
+//                val title: String // File:Question book-new.svg
+//            )
+//
 //            data class Revision(
-//                val *: String, // * [[:it:Neuro-Oncologia]]* [[:it:Classificazione dei tumori del sistema nervoso centrale]]* [[:it:Gradazione dei tumori del sistema nervoso centrale]]*[[:en:Gliomatosis cerebri]]<br><br><gallery>Image:Gliomatosis cerebri.jpg|Radiology</br>Gliomatosis cerebri Image:Gliomatosis cerebri2.jpg|Radiology</br>Gliomatosis cerebriImage:AFIP-00405606 Gliomatosis Cerebri.jpg|Radiology</br>AFIP-00405606</gallery><gallery>Image:AFIP-00405557 Gliomatosis Cerebri.jpg|Micro</br>AFIP-00405557Image:AFIP-00405607 Gliomatosis Cerebri.jpg|Micro</br>AFIP-00405607Image:AFIP-00405608 Gliomatosis Cerebri.jpg|Micro</br>AFIP-00405608</gallery>[[Category:Gliomatosis cerebri]]
+//                val *: String, // {{short description|1920 film}}{{More citations needed|date=June 2019}}{{use mdy dates|date=December 2014}}{{Infobox film| name           = The Stranger| image          = | image_size     = | caption        = | director       = | producer       = | writer         = [[W. C. Tuttle]]| starring       = [[Hoot Gibson]]| music          = | cinematography = | editing        = | distributor    = | released       = {{film date|1920|12|4}}| runtime        = 20 minutes| country        = United States | language       = [[Silent film|Silent]]<br>English intertitles| budget         = }}'''''The Stranger''''' is a 1920 American [[short film|short]] [[Western (genre)|Western film]] featuring [[Hoot Gibson]].==Cast==* [[Hoot Gibson]]* Dorothy Woods==See also==* [[Hoot Gibson filmography]]==External links==*{{IMDb title|id=0222402|title=The Stranger}}{{DEFAULTSORT:Stranger, The}}[[Category:1920 films]][[Category:American films]][[Category:American silent short films]][[Category:1920 Western (genre) films]][[Category:1920 short films]][[Category:American black-and-white films]][[Category:Silent American Western (genre) films]]{{1920s-Western-film-stub}}{{short-silent-film-stub}}
 //                val contentformat: String, // text/x-wiki
 //                val contentmodel: String // wikitext
 //            )
