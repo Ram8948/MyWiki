@@ -1,4 +1,4 @@
-# MyWikiParser
+# MyWiki
 
 Library Used
 1. Retrofit (squareup.retrofit2)
