@@ -6,19 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.ramosoft.mywiki.data.entities.ImageModel
 import com.ramosoft.mywiki.databinding.ItemCharacterBinding
 
 class ImageinfosAdapter(private val listener: ImageinfoItemListener) : RecyclerView.Adapter<ImageinfoViewHolder>() {
 
     interface ImageinfoItemListener {
-        fun onClickedImageinfo(ImageinfoId: String)
+        fun onClickedImageinfo(ImageinfoId: ImageModel.Query.Allimage)
     }
 
-    private val items = ArrayList<ImageModel.Query.MapValue.Imageinfo>()
+    private val items = ArrayList<ImageModel.Query.Allimage>()
 
-    fun setItems(items: ArrayList<ImageModel.Query.MapValue.Imageinfo>) {
+    fun setItems(items: ArrayList<ImageModel.Query.Allimage>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
@@ -37,16 +36,16 @@ class ImageinfosAdapter(private val listener: ImageinfoItemListener) : RecyclerV
 class ImageinfoViewHolder(private val itemBinding: ItemCharacterBinding, private val listener: ImageinfosAdapter.ImageinfoItemListener) : RecyclerView.ViewHolder(itemBinding.root),
     View.OnClickListener {
 
-    private lateinit var Imageinfo: ImageModel.Query.MapValue.Imageinfo
+    private lateinit var Imageinfo: ImageModel.Query.Allimage
 
     init {
         itemBinding.root.setOnClickListener(this)
     }
 
     @SuppressLint("SetTextI18n")
-    fun bind(item: ImageModel.Query.MapValue.Imageinfo) {
+    fun bind(item: ImageModel.Query.Allimage) {
         this.Imageinfo = item
-//        itemBinding.name.text = item.user
+        itemBinding.name.text = item.name
 //        itemBinding.speciesAndStatus.text = """${item.descriptionshorturl} - ${item.descriptionurl}"""
         Glide.with(itemBinding.root)
             .load(item.url)
@@ -54,7 +53,7 @@ class ImageinfoViewHolder(private val itemBinding: ItemCharacterBinding, private
     }
 
     override fun onClick(v: View?) {
-        listener.onClickedImageinfo(Imageinfo.url)
+        listener.onClickedImageinfo(Imageinfo)
     }
 }
 

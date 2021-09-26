@@ -1,4 +1,4 @@
-package com.ramosoft.mywiki.ui.images
+package com.ramosoft.mywiki.ui.article
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,33 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
-import com.ramosoft.mywiki.R
-import com.ramosoft.mywiki.data.entities.ImageModel
+import com.ramosoft.mywiki.data.entities.ArticleModel
 import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.view.*
 
 @AndroidEntryPoint
-class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
+class ArticleFragment : Fragment(), ArticleAdapter.ArticleItemListener {
 
     private var binding: CharactersFragmentBinding by autoCleared()
-    private val viewModel: ImageinfosViewModel by viewModels()
-    private lateinit var adapter: ImageinfosAdapter
-    lateinit var navController: NavController
+    private val viewModel: ArticleViewModel by viewModels()
+    private lateinit var adapter: ArticleAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,16 +36,11 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
-
-//        val navHostFragment: NavHostFragment = binding.navHostFragment as NavHostFragment
-//        navController = navHostFragment.navController
-
     }
 
-
     private fun setupRecyclerView() {
-        adapter = ImageinfosAdapter(this)
-        binding.ImageinfosRv.layoutManager = GridLayoutManager(requireContext(),2)
+        adapter = ArticleAdapter(this)
+        binding.ImageinfosRv.layoutManager = LinearLayoutManager(requireContext())
         binding.ImageinfosRv.adapter = adapter
     }
 
@@ -74,18 +60,15 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
         })
     }
 
-    override fun onClickedImageinfo(ImageinfoId: ImageModel.Query.Allimage) {
-//        binding.navHostFragment.findNavController().navigate(
-//            R.id.action_ImageinfosFragment_to_ImageDetailFragment,
+    override fun onClickedImageinfo(currentPage: ArticleModel.Query.Page) {
+//        findNavController().navigate(
+//            R.id.action_ImageinfosFragment_to_ImageinfoDetailFragment,
 //            bundleOf("id" to ImageinfoId)
 //        )
 
-//        requireActivity().supportFragmentManager.beginTransaction()
-//            .add((binding.root!!.parent as ViewGroup).id, ImageDetailFragment.newInstacne(ImageinfoId),"IMAGEDETAIL")
-//            .commit()
-        val intent = Intent(requireActivity(),ImageDetailsActivity::class.java)
-        val pageJson = Gson().toJson(ImageinfoId)
-        intent.putExtra("page", pageJson)
-        requireActivity().startActivity(intent)
+        val detailPageIntent = Intent(requireActivity(), ArticleDetailActivity::class.java)
+        val pageJson = Gson().toJson(currentPage)
+        detailPageIntent.putExtra("page", pageJson)
+        requireActivity().startActivity(detailPageIntent)
     }
 }

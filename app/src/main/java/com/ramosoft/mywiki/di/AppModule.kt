@@ -24,7 +24,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson) : Retrofit = Retrofit.Builder()
-        .baseUrl("https://commons.wikimedia.org/")
+        .baseUrl("https://en.wikipedia.org/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 

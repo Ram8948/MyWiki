@@ -18,7 +18,7 @@ class ImageDetailViewModel  @ViewModelInject constructor(
     private val _character = _id.switchMap { id ->
         repository.getImageinfo(id)
     }
-    val character: LiveData<Resource<ImageModel.Query.MapValue.Imageinfo>> = _character
+    val character: LiveData<Resource<ImageModel.Query.Allimage>> = _character
 
 
     fun start(id: Int) {

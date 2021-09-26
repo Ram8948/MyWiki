@@ -4,35 +4,29 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 data class ImageModel(
-    val batchcomplete: String,
+    val batchcomplete: Boolean, // true
     val `continue`: Continue,
     val query: Query
 ) {
     data class Continue(
-        val `continue`: String, // gcmcontinue||
-        val gcmcontinue: String // file|3030313131372031352d34342d323030322d544f2d475255505045522d524f53412d51414a41522d464c49534552322e4a50470a3030313131372031352d34342d323030322d544f2d475255505045522d524f53412d51414a41522d464c49534552322e4a5047|24259710
+        val aicontinue: String, // "A_Challenge_for_Robin_Hood"(1967).jpg
+        val `continue`: String // -||
     )
 
     data class Query(
-        val pages: Map<Int,MapValue>
+        val allimages: List<Allimage>
     ) {
-        data class MapValue(
-            val imageinfo: List<Imageinfo>,
-            val imagerepository: String, // local
+        @Entity(tableName = "Imageinfo")
+        data class Allimage(
+            @PrimaryKey(autoGenerate = true)
+            val id: Int,
+            val descriptionshorturl: String, // https://en.wikipedia.org/w/index.php?curid=49816251
+            val descriptionurl: String, // https://en.wikipedia.org/wiki/File:!!!_(Chk_Chk_Chk)_-_One_Girl_One_Boy_cover_art.jpg
+            val name: String, // !!!_(Chk_Chk_Chk)_-_One_Girl_One_Boy_cover_art.jpg
             val ns: Int, // 6
-            val pageid: Int, // 49179423
-            val title: String // File:"Broke, baby sick, and car trouble!" - Dorothea Lange's photo of a Missouri family of five in the vicinity of Tracy, California.jpg
-        ) {
-            @Entity(tableName = "Imageinfo")
-            data class Imageinfo(
-                @PrimaryKey(autoGenerate = true)
-                val id: Int,
-                val descriptionshorturl: String, // https://commons.wikimedia.org/w/index.php?curid=49179423
-                val descriptionurl: String, // https://commons.wikimedia.org/wiki/File:%22Broke,_baby_sick,_and_car_trouble!%22_-_Dorothea_Lange%27s_photo_of_a_Missouri_family_of_five_in_the_vicinity_of_Tracy,_California.jpg
-                val timestamp: String, // 2016-06-01T22:33:46Z
-                val url: String, // https://upload.wikimedia.org/wikipedia/commons/9/91/%22Broke%2C_baby_sick%2C_and_car_trouble%21%22_-_Dorothea_Lange%27s_photo_of_a_Missouri_family_of_five_in_the_vicinity_of_Tracy%2C_California.jpg
-                val user: String // Adam Cuerden
-            )
-        }
+            val timestamp: String, // 2017-12-31T06:16:58Z
+            val title: String, // File:!!! (Chk Chk Chk) - One Girl One Boy cover art.jpg
+            val url: String // https://upload.wikimedia.org/wikipedia/en/b/ba/%21%21%21_%28Chk_Chk_Chk%29_-_One_Girl_One_Boy_cover_art.jpg
+        )
     }
 }

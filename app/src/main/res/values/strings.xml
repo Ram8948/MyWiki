@@ -3,4 +3,6 @@
     <string name="articles">Articles</string>
     <string name="gallery">Gallery</string>
     <string name="category">Category</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

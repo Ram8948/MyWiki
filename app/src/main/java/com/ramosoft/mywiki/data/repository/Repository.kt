@@ -23,16 +23,22 @@ class Repository @Inject constructor(
         saveCallResult = { localDataSource.insertAllCategory(it.query.allcategories) }
     )
 
+    fun getArticles() = performGetOperation(
+        databaseQuery = { localDataSource.getArticles() },
+        networkCall = { remoteDataSource.getArticles() },
+        saveCallResult = { localDataSource.insertArticles(it.query.pages) }
+    )
+
     fun getImageinfos() = performGetOperation(
         databaseQuery = { localDataSource.getAllImageinfos() },
         networkCall = { remoteDataSource.getImageinfos() },
-        saveCallResult = { localDataSource.insertAllImage(getImageList(it.query.pages)) }
+        saveCallResult = { localDataSource.insertAllImage(it.query.allimages) }
     )
 
-    fun getImageList(map: Map<Int, ImageModel.Query.MapValue>):List<ImageModel.Query.MapValue.Imageinfo>
-    {
-        val items = ArrayList<ImageModel.Query.MapValue.Imageinfo>()
-        map.forEach { (key, value) -> items.addAll(value.imageinfo) }
-        return items
-    }
+//    fun getImageList(map: Map<Int, ImageModel.Query.MapValue>):List<ImageModel.Query.Allimage>
+//    {
+//        val items = ArrayList<ImageModel.Query.Allimage>()
+//        map.forEach { (key, value) -> items.addAll(value.imageinfo) }
+//        return items
+//    }
 }

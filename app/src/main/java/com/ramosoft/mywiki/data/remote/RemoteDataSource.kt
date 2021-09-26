@@ -9,4 +9,5 @@ class RemoteDataSource @Inject constructor(
     suspend fun getImageinfos() = getResult { ApiService.getAllImageinfos() }
     suspend fun getImageinfo(id: Int) = getResult { ApiService.getImageinfo(id) }
     suspend fun getCategories() = getResult { ApiService.getCategories() }
+    suspend fun getArticles() = getResult { ApiService.getArticles()}
 }
