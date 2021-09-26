@@ -13,7 +13,7 @@ import com.ramosoft.mywiki.databinding.ItemCategoryBinding
 class CategoryAdapter(private val listener: CategoryItemListener) : RecyclerView.Adapter<CategoryViewHolder>() {
 
     interface CategoryItemListener {
-        fun onClickedImageinfo(ImageinfoId: Int)
+        fun onClickedImageinfo(ImageinfoId: CategoryModel.Query.Allcategory)
     }
 
     private val items = ArrayList<CategoryModel.Query.Allcategory>()
@@ -51,7 +51,7 @@ class CategoryViewHolder(private val itemBinding: ItemCategoryBinding, private v
     }
 
     override fun onClick(v: View?) {
-        listener.onClickedImageinfo(Imageinfo.id)
+        listener.onClickedImageinfo(Imageinfo)
     }
 }
 

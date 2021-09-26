@@ -1,5 +1,6 @@
 package com.ramosoft.mywiki.ui.images
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.ramosoft.mywiki.R
+import com.ramosoft.mywiki.data.entities.CategoryModel
 import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
+import com.ramosoft.mywiki.ui.article.ArticleDetailActivity
+import com.ramosoft.mywiki.ui.category.CategoryDetailActivity
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,10 +65,15 @@ class CategoryFragment : Fragment(), CategoryAdapter.CategoryItemListener {
         })
     }
 
-    override fun onClickedImageinfo(ImageinfoId: Int) {
+    override fun onClickedImageinfo(ImageinfoId: CategoryModel.Query.Allcategory) {
 //        findNavController().navigate(
 //            R.id.action_ImageinfosFragment_to_ImageinfoDetailFragment,
 //            bundleOf("id" to ImageinfoId)
 //        )
+
+        val detailPageIntent = Intent(requireActivity(), CategoryDetailActivity::class.java)
+        val pageJson = Gson().toJson(ImageinfoId)
+        detailPageIntent.putExtra("page", pageJson)
+        requireActivity().startActivity(detailPageIntent)
     }
 }

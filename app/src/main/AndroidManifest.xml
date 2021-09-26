@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ui.images.ImageDetailsActivity"/>
         <activity android:name=".ui.article.ArticleDetailActivity"/>
+        <activity android:name=".ui.category.CategoryDetailActivity"/>
     </application>
 
 </manifest>
