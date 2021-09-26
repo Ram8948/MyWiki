@@ -21,6 +21,8 @@ import com.google.gson.Gson
 import com.ramosoft.mywiki.R
 import com.ramosoft.mywiki.data.entities.ImageModel
 import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
+import com.ramosoft.mywiki.utils.OnLoadMoreListener
+import com.ramosoft.mywiki.utils.RecyclerViewLoadMoreScroll
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,10 +47,7 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
-
-//        val navHostFragment: NavHostFragment = binding.navHostFragment as NavHostFragment
-//        navController = navHostFragment.navController
-
+        setRVScrollListener()
     }
 
 
@@ -56,6 +55,31 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
         adapter = ImageinfosAdapter(this)
         binding.ImageinfosRv.layoutManager = GridLayoutManager(requireContext(),2)
         binding.ImageinfosRv.adapter = adapter
+    }
+    lateinit var scrollListener: RecyclerViewLoadMoreScroll
+    private  fun setRVScrollListener() {
+        scrollListener = RecyclerViewLoadMoreScroll(binding.ImageinfosRv.layoutManager as LinearLayoutManager)
+        scrollListener.setOnLoadMoreListener(object :
+            OnLoadMoreListener {
+            override fun onLoadMore() {
+                viewModel.databaseRepository.getImageinfosNext("").observe(viewLifecycleOwner, Observer {
+                    when (it.status) {
+                        Resource.Status.SUCCESS -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(requireActivity(),"onLoadMore addData",Toast.LENGTH_SHORT).show()
+                            if (!it.data.isNullOrEmpty()) adapter.addData(ArrayList(it.data))
+                            scrollListener.setLoaded()
+                        }
+                        Resource.Status.ERROR ->
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
+                        Resource.Status.LOADING ->
+                            binding.progressBar.visibility = View.VISIBLE
+                    }
+                })
+            }
+        })
+        binding.ImageinfosRv.addOnScrollListener(scrollListener)
     }
 
     private fun setupObservers() {
@@ -75,14 +99,6 @@ class ImageinfosFragment : Fragment(), ImageinfosAdapter.ImageinfoItemListener {
     }
 
     override fun onClickedImageinfo(ImageinfoId: ImageModel.Query.Allimage) {
-//        binding.navHostFragment.findNavController().navigate(
-//            R.id.action_ImageinfosFragment_to_ImageDetailFragment,
-//            bundleOf("id" to ImageinfoId)
-//        )
-
-//        requireActivity().supportFragmentManager.beginTransaction()
-//            .add((binding.root!!.parent as ViewGroup).id, ImageDetailFragment.newInstacne(ImageinfoId),"IMAGEDETAIL")
-//            .commit()
         val intent = Intent(requireActivity(),ImageDetailsActivity::class.java)
         val pageJson = Gson().toJson(ImageinfoId)
         intent.putExtra("page", pageJson)

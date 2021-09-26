@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.ramosoft.mywiki.data.repository.Repository
 
 class CategoryViewModel @ViewModelInject constructor(
-    repository: Repository
-) : ViewModel() {
-
+    repository: Repository) : ViewModel() {
+    val databaseRepository: Repository = repository
     val Imageinfos = repository.getCategories()
 }

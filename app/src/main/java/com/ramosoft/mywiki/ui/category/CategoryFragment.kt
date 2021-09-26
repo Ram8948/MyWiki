@@ -18,6 +18,8 @@ import com.ramosoft.mywiki.data.entities.CategoryModel
 import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
 import com.ramosoft.mywiki.ui.article.ArticleDetailActivity
 import com.ramosoft.mywiki.ui.category.CategoryDetailActivity
+import com.ramosoft.mywiki.utils.OnLoadMoreListener
+import com.ramosoft.mywiki.utils.RecyclerViewLoadMoreScroll
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,12 +43,38 @@ class CategoryFragment : Fragment(), CategoryAdapter.CategoryItemListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
+        setRVScrollListener()
     }
 
     private fun setupRecyclerView() {
         adapter = CategoryAdapter(this)
         binding.ImageinfosRv.layoutManager = LinearLayoutManager(requireContext())
         binding.ImageinfosRv.adapter = adapter
+    }
+    lateinit var scrollListener: RecyclerViewLoadMoreScroll
+    private  fun setRVScrollListener() {
+        scrollListener = RecyclerViewLoadMoreScroll(binding.ImageinfosRv.layoutManager as LinearLayoutManager)
+        scrollListener.setOnLoadMoreListener(object :
+            OnLoadMoreListener {
+            override fun onLoadMore() {
+                viewModel.databaseRepository.getCategoriesNext("").observe(viewLifecycleOwner, Observer {
+                    when (it.status) {
+                        Resource.Status.SUCCESS -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(requireActivity(),"onLoadMore addData",Toast.LENGTH_SHORT).show()
+                            if (!it.data.isNullOrEmpty()) adapter.addData(ArrayList(it.data))
+                            scrollListener.setLoaded()
+                        }
+                        Resource.Status.ERROR ->
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
+                        Resource.Status.LOADING ->
+                            binding.progressBar.visibility = View.VISIBLE
+                    }
+                })
+            }
+        })
+        binding.ImageinfosRv.addOnScrollListener(scrollListener)
     }
 
     private fun setupObservers() {
@@ -66,11 +94,6 @@ class CategoryFragment : Fragment(), CategoryAdapter.CategoryItemListener {
     }
 
     override fun onClickedImageinfo(ImageinfoId: CategoryModel.Query.Allcategory) {
-//        findNavController().navigate(
-//            R.id.action_ImageinfosFragment_to_ImageinfoDetailFragment,
-//            bundleOf("id" to ImageinfoId)
-//        )
-
         val detailPageIntent = Intent(requireActivity(), CategoryDetailActivity::class.java)
         val pageJson = Gson().toJson(ImageinfoId)
         detailPageIntent.putExtra("page", pageJson)

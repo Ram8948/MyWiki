@@ -22,23 +22,31 @@ class Repository @Inject constructor(
         networkCall = { remoteDataSource.getCategories() },
         saveCallResult = { localDataSource.insertAllCategory(it.query.allcategories) }
     )
-
     fun getArticles() = performGetOperation(
         databaseQuery = { localDataSource.getArticles() },
         networkCall = { remoteDataSource.getArticles() },
         saveCallResult = { localDataSource.insertArticles(it.query.pages) }
     )
-
     fun getImageinfos() = performGetOperation(
         databaseQuery = { localDataSource.getAllImageinfos() },
         networkCall = { remoteDataSource.getImageinfos() },
         saveCallResult = { localDataSource.insertAllImage(it.query.allimages) }
     )
 
-//    fun getImageList(map: Map<Int, ImageModel.Query.MapValue>):List<ImageModel.Query.Allimage>
-//    {
-//        val items = ArrayList<ImageModel.Query.Allimage>()
-//        map.forEach { (key, value) -> items.addAll(value.imageinfo) }
-//        return items
-//    }
+    fun getArticlesNext(string: String) = performGetOperation(
+        databaseQuery = { localDataSource.getArticles() },
+        networkCall = { remoteDataSource.getArticlesNext(string) },
+        saveCallResult = { localDataSource.insertArticles(it.query.pages) }
+    )
+
+    fun getImageinfosNext(string: String) = performGetOperation(
+        databaseQuery = { localDataSource.getAllImageinfos() },
+        networkCall = { remoteDataSource.getImageinfosNext(string) },
+        saveCallResult = { localDataSource.insertAllImage(it.query.allimages) }
+    )
+    fun getCategoriesNext(string: String) = performGetOperation(
+        databaseQuery = { localDataSource.getCategories() },
+        networkCall = { remoteDataSource.getCategoriesNext(string) },
+        saveCallResult = { localDataSource.insertAllCategory(it.query.allcategories) }
+    )
 }

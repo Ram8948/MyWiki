@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.ramosoft.mywiki.data.entities.ArticleModel
 import com.ramosoft.mywiki.data.entities.CategoryModel
 import com.ramosoft.mywiki.databinding.ItemCategoryBinding
 
@@ -20,6 +21,11 @@ class CategoryAdapter(private val listener: CategoryItemListener) : RecyclerView
 
     fun setItems(items: ArrayList<CategoryModel.Query.Allcategory>) {
         this.items.clear()
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
+    fun addData(items: ArrayList<CategoryModel.Query.Allcategory>) {
         this.items.addAll(items)
         notifyDataSetChanged()
     }

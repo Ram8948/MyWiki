@@ -2,6 +2,7 @@ package com.ramosoft.mywiki.ui.article
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,10 @@ import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.recyclerview.widget.RecyclerView
+import com.ramosoft.mywiki.utils.OnLoadMoreListener
+import com.ramosoft.mywiki.utils.RecyclerViewLoadMoreScroll
+
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment(), ArticleAdapter.ArticleItemListener {
@@ -36,12 +41,38 @@ class ArticleFragment : Fragment(), ArticleAdapter.ArticleItemListener {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupObservers()
+        setRVScrollListener()
     }
 
     private fun setupRecyclerView() {
         adapter = ArticleAdapter(this)
         binding.ImageinfosRv.layoutManager = LinearLayoutManager(requireContext())
         binding.ImageinfosRv.adapter = adapter
+    }
+    lateinit var scrollListener: RecyclerViewLoadMoreScroll
+    private  fun setRVScrollListener() {
+        scrollListener = RecyclerViewLoadMoreScroll(binding.ImageinfosRv.layoutManager as LinearLayoutManager)
+        scrollListener.setOnLoadMoreListener(object :
+            OnLoadMoreListener {
+            override fun onLoadMore() {
+                viewModel.databaseRepository.getArticlesNext("").observe(viewLifecycleOwner, Observer {
+                    when (it.status) {
+                        Resource.Status.SUCCESS -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(requireActivity(),"onLoadMore addData",Toast.LENGTH_SHORT).show()
+                            if (!it.data.isNullOrEmpty()) adapter.addData(ArrayList(it.data))
+                            scrollListener.setLoaded()
+                        }
+                        Resource.Status.ERROR ->
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+
+                        Resource.Status.LOADING ->
+                            binding.progressBar.visibility = View.VISIBLE
+                    }
+                })
+            }
+        })
+        binding.ImageinfosRv.addOnScrollListener(scrollListener)
     }
 
     private fun setupObservers() {
@@ -59,13 +90,7 @@ class ArticleFragment : Fragment(), ArticleAdapter.ArticleItemListener {
             }
         })
     }
-
     override fun onClickedImageinfo(currentPage: ArticleModel.Query.Page) {
-//        findNavController().navigate(
-//            R.id.action_ImageinfosFragment_to_ImageinfoDetailFragment,
-//            bundleOf("id" to ImageinfoId)
-//        )
-
         val detailPageIntent = Intent(requireActivity(), ArticleDetailActivity::class.java)
         val pageJson = Gson().toJson(currentPage)
         detailPageIntent.putExtra("page", pageJson)

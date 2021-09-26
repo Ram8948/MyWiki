@@ -23,6 +23,11 @@ class ArticleAdapter(private val listener: ArticleItemListener) : RecyclerView.A
         notifyDataSetChanged()
     }
 
+    fun addData(items: ArrayList<ArticleModel.Query.Page>) {
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val binding: ArticleCardItemBinding = ArticleCardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ArticleViewHolder(binding, listener)
@@ -46,9 +51,9 @@ class ArticleViewHolder(private val itemBinding: ArticleCardItemBinding, private
     fun bind(item: ArticleModel.Query.Page) {
         this.Imageinfo = item
         itemBinding.articleTitle.text = item.title
-        Glide.with(itemBinding.root)
-            .load("item.thumbnail!!.source")
-            .into(itemBinding.articleImage)
+//        Glide.with(itemBinding.root)
+//            .load("item.thumbnail!!.source")
+//            .into(itemBinding.articleImage)
     }
 
     override fun onClick(v: View?) {
