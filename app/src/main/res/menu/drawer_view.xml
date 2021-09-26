@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/id_light"
-        android:title="@string/articles"
-        android:icon="@drawable/ic_baseline_home">
+        android:id="@+id/id_day_light"
+        android:title="@string/dart_light"
+        android:icon="@drawable/ic_baseline_dark_mode_24">
     </item>
     <item
-        android:id="@+id/id_dark"
+        android:id="@+id/id_articles"
+        android:title="@string/articles"
+        android:icon="@drawable/ic_baseline_article_24">
+    </item>
+    <item
+        android:id="@+id/id_gallery"
         android:title="@string/gallery"
-        android:icon="@drawable/ic_baseline_search" >
+        android:icon="@drawable/ic_baseline_image_24" >
+    </item>
+    <item
+        android:id="@+id/id_category"
+        android:title="@string/category"
+        android:icon="@drawable/ic_baseline_category_24" >
     </item>
 </menu>

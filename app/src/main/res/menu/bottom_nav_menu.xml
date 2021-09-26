@@ -3,16 +3,16 @@
     <item
         android:id="@+id/articlesFragment"
         android:title="@string/articles"
-        android:icon="@drawable/ic_baseline_home">
+        android:icon="@drawable/ic_baseline_article_24">
     </item>
     <item
         android:id="@+id/imagesFragment"
         android:title="@string/gallery"
-        android:icon="@drawable/ic_baseline_search" >
+        android:icon="@drawable/ic_baseline_image_24" >
     </item>
     <item
         android:id="@+id/categoryFragment"
         android:title="@string/category"
-        android:icon="@drawable/ic_baseline_person">
+        android:icon="@drawable/ic_baseline_category_24">
     </item>
 </menu>

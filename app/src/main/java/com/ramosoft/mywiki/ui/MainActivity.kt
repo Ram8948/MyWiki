@@ -28,10 +28,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
-
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 //        val navHostFragment: NavHostFragment =
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         Toast.makeText(this, "Publication", Toast.LENGTH_SHORT).show()
         when (menuItem.itemId) {
-            R.id.id_dark -> {
+            R.id.id_day_light -> {
                 Toast.makeText(this, "Publication", Toast.LENGTH_SHORT).show()
                 val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
                 when (isNightTheme) {
@@ -97,15 +97,14 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             }
-            R.id.id_light -> {
-                Toast.makeText(this, "Android Store", Toast.LENGTH_SHORT).show()
-                val isNightTheme = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-                when (isNightTheme) {
-                    Configuration.UI_MODE_NIGHT_YES ->
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    Configuration.UI_MODE_NIGHT_NO ->
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            R.id.id_articles -> {
+                binding.viewPager.currentItem = 0
                 }
+            R.id.id_gallery -> {
+                binding.viewPager.currentItem = 1
+            }
+            R.id.id_category -> {
+                binding.viewPager.currentItem = 2
             }
         }
         drawer_layout.closeDrawer(GravityCompat.START)

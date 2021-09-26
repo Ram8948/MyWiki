@@ -47,7 +47,7 @@ class CategoryViewHolder(private val itemBinding: ItemCategoryBinding, private v
     fun bind(item: CategoryModel.Query.Allcategory) {
         this.Imageinfo = item
         itemBinding.name.text = item.category
-        itemBinding.id.text = item.id.toString()
+//        itemBinding.id.text = item.id.toString()
     }
 
     override fun onClick(v: View?) {
