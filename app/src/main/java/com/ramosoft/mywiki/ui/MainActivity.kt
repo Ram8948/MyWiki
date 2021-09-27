@@ -85,7 +85,6 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        Toast.makeText(this, "Publication", Toast.LENGTH_SHORT).show()
         when (menuItem.itemId) {
             R.id.id_day_light -> {
                 Toast.makeText(this, "Publication", Toast.LENGTH_SHORT).show()
