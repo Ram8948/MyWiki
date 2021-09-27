@@ -15,7 +15,7 @@ interface ApiService {
     @GET("Imageinfo/{id}")
     suspend fun getImageinfo(@Path("id") id: Int): Response<ImageModel.Query.Allimage>
 
-    @GET("w/api.php?action=query&list=allcategories&formatversion=2&format=json")
+    @GET("/w/api.php?action=query&list=allcategories&formatversion=2&format=json&aplimit=15")
     suspend fun getCategories() : Response<CategoryModel>
 
     @GET("w/api.php?action=query&format=json&formatversion=2&generator=random&grnnamespace=0&prop=pageimages|info&grnlimit=15&inprop=url&pithumbsize=200")
@@ -27,6 +27,6 @@ interface ApiService {
     @GET("/w/api.php?action=query&format=json&list=allimages&formatversion=2&ailimit=15")
     suspend fun getAllImageinfosNext(@Query("continue") continue_txt: String) : Response<ImageModel>
 
-    @GET("w/api.php?action=query&list=allcategories&formatversion=2&format=json")
+    @GET("/w/api.php?action=query&list=allcategories&formatversion=2&format=json&aplimit=15")
     suspend fun getCategoriesNext(@Query("continue") continue_txt: String) : Response<CategoryModel>
 }

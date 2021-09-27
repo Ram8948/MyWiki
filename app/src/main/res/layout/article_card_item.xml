@@ -21,15 +21,15 @@
                 android:id="@+id/article_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="16dp"
-                />
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/article_image" />
             <TextView
                 android:id="@+id/article_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/article_image"
+                android:layout_toEndOf="@+id/article_image"
                 android:textStyle="italic"
                 android:textSize="18sp"/>
         </RelativeLayout>

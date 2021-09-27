@@ -2,7 +2,6 @@ package com.ramosoft.mywiki.ui.article
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,6 @@ import com.ramosoft.mywiki.databinding.CharactersFragmentBinding
 import com.ramosoft.mywiki.utils.Resource
 import com.ramosoft.mywiki.utils.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.recyclerview.widget.RecyclerView
 import com.ramosoft.mywiki.utils.OnLoadMoreListener
 import com.ramosoft.mywiki.utils.RecyclerViewLoadMoreScroll
 
@@ -59,7 +57,6 @@ class ArticleFragment : Fragment(), ArticleAdapter.ArticleItemListener {
                     when (it.status) {
                         Resource.Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(requireActivity(),"onLoadMore addData",Toast.LENGTH_SHORT).show()
                             if (!it.data.isNullOrEmpty()) adapter.addData(ArrayList(it.data))
                             scrollListener.setLoaded()
                         }

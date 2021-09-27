@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.ramosoft.mywiki.data.entities.ArticleModel
 import com.ramosoft.mywiki.data.entities.ImageModel
 import com.ramosoft.mywiki.databinding.ItemCharacterBinding
 

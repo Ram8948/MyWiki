@@ -61,7 +61,6 @@ class CategoryFragment : Fragment(), CategoryAdapter.CategoryItemListener {
                     when (it.status) {
                         Resource.Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
-                            Toast.makeText(requireActivity(),"onLoadMore addData",Toast.LENGTH_SHORT).show()
                             if (!it.data.isNullOrEmpty()) adapter.addData(ArrayList(it.data))
                             scrollListener.setLoaded()
                         }

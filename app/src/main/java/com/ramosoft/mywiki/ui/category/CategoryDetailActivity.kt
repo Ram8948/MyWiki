@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_article_detail.*
 import com.ramosoft.mywiki.R
-import com.ramosoft.mywiki.data.entities.ArticleModel
 import com.ramosoft.mywiki.data.entities.CategoryModel
 
 class CategoryDetailActivity : AppCompatActivity() {

@@ -5,7 +5,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.ramosoft.mywiki.data.entities.ArticleModel
 import com.ramosoft.mywiki.data.entities.ImageModel
 import com.ramosoft.mywiki.databinding.ImageDetailFragmentBinding
 import kotlinx.android.synthetic.main.activity_article_detail.*

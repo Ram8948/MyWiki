@@ -6,4 +6,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="dart_light">Dart/Light</string>
+    <string name="my_account">My Account</string>
+    <string name="feature_image">Feature Image</string>
+    <string name="article_image">Article Image</string>
 </resources>
